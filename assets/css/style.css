@@ -569,13 +569,14 @@ section {
 
 #about .about-img {
   position: relative;
-  margin: 30px 30px 30px 30px;
+  margin: 140px 30px 30px 30px;
 }
 
 #about .about-img img {
   width: 100%;
   border: 8px solid #fff;
   transition: .5s;
+
 }
 
 #about .about-img img:hover {
