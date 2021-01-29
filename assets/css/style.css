@@ -10,9 +10,16 @@
 --------------------------------------------------------------*/
 
 
+ .card-block .list-group .list-group-item{
+  font-weight: 700 !important;
+ }
+
+
 .ion-android-checkmark-circle{
   color: #1bb1dc;
 }
+
+
 
 
 body {
@@ -775,7 +782,7 @@ section {
 
 #features h4 {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 36px;
 }
 
 /* Portfolio Section
