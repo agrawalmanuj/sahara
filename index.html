@@ -941,9 +941,9 @@ professionals having rich experience from the Industry.</p>
               <h4>Send us a message</h4>
               
 
-              <form action="https://formspree.io/f/myyborjo" method="POST" role="form" class="php-email-form">
+              <form id="my-form"  method="POST" role="form" class="php-email-form">
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter your name" />
                   <div class="validate"></div>
                 </div>
                 <div class="form-group">
@@ -951,7 +951,7 @@ professionals having rich experience from the Industry.</p>
                   <div class="validate"></div>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:1" data-msg="please enter subject" />
                   <div class="validate"></div>
                 </div>
                 <div class="form-group">
@@ -965,7 +965,10 @@ professionals having rich experience from the Industry.</p>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
                 </div>!-->
 
-                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+                <div class="text-center">
+                  <button id="my-form-button" type="submit" title="Send Message">Send Message</button>
+                  <p id="my-form-status"></p>
+                </div>
               </form>
 
             </div>
@@ -1003,5 +1006,57 @@ professionals having rich experience from the Industry.</p>
   <script src="assets/js/main.js"></script>
 
 </body>
+
+
+
+
+
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+
+    // get the form elements defined in your form HTML above
+    
+    var form = document.getElementById("my-form");
+    var button = document.getElementById("my-form-button");
+    var status = document.getElementById("my-form-status");
+
+    // Success and Error functions for after the form is submitted
+    
+    function success() {
+      form.reset();
+      button.style = "display: none ";
+      status.innerHTML = "Thanks!";
+    }
+
+    function error() {
+      status.innerHTML = "Oops! There was a problem.";
+    }
+
+    // handle the form submission event
+
+    form.addEventListener("submit", function(ev) {
+      ev.preventDefault();
+      var data = new FormData(form);
+      ajax(form.method, `https://formspree.io/f/myyborjo`, data, success, error);
+    });
+  });
+  
+  // helper function for sending an AJAX request
+
+  function ajax(method, url, data, success, error) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== XMLHttpRequest.DONE) return;
+      if (xhr.status === 200) {
+        success(xhr.response, xhr.responseType);
+      } else {
+        error(xhr.status, xhr.response, xhr.responseType);
+      }
+    };
+    xhr.send(data);
+  }
+</script>
 
 </html>
